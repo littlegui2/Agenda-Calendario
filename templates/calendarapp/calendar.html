@@ -8,12 +8,12 @@
 
 {% block breadcrumb %}
   <div>
-      <h1><i class="fa fa-calendar"></i> Calendar</h1>
-      <p>Event Calendar</p>
+      <h1><i class="fa fa-calendar"></i> Calendário</h1>
+      <p>Evento Calendário</p>
   </div>
   <ul class="app-breadcrumb breadcrumb">
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="#">Calendar</a></li>
+      <li class="breadcrumb-item"><a href="#"> Calendário</a></li>
   </ul>
 {% endblock breadcrumb %}
 
@@ -23,15 +23,15 @@
         <div class="tile row">
             <div class="col-md-3">
                 <div id="external-events">
-                    <h4 class="mb-4">Running Events</h4>
+                    <h4 class="mb-4">Carregando eventos</h4>
                     {% for event in events_month %}
                       <div class="fc-event">
                           <h3>{{ event.title }}</h3>
-                          <p>From: {{ event.start_time }}</p>
-                          <p>To: {{ event.end_time }}</p>
+                          <p>De: {{ event.start_time }}</p>
+                          <p>Para: {{ event.end_time }}</p>
                       </div>
                     {% empty %}
-                      <p>No Running Events Found</p>
+                      <p>Sem eventos</p>
                     {% endfor %}
                 </div>
             </div>
