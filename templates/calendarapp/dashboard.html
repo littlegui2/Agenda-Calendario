@@ -5,12 +5,12 @@
 
 {% block breadcrumb %}
     <div>
-        <h1><i class="fa fa-dashboard"></i> Dashboard</h1>
-        <p>Event Dashboard</p>
+        <h1><i class="fa fa-dashboard"></i> Página Principal</h1>
+        <p>Eventos</p>
     </div>
     <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="#">Página Principal</a></li>
     </ul>
 {% endblock breadcrumb %}
 
@@ -20,7 +20,7 @@
         <div class="widget-small primary coloured-icon">
             <i class="icon fa fa-files-o fa-3x"></i>
             <div class="info">
-                <h4>Total Completed Events</h4>
+                <h4>Total de Eventos</h4>
                 <p><b>{{ total_event }}</b></p>
             </div>
         </div>
@@ -29,7 +29,7 @@
         <div class="widget-small info coloured-icon">
             <i class="icon fa fa-thumbs-o-up fa-3x"></i>
             <div class="info">
-                <h4>Total Running Events</h4>
+                <h4>Eventos Ativos</h4>
                 <p><b>{{ running_events.count }}</b></p>
             </div>
         </div>
@@ -40,15 +40,6 @@
             <div class="info">
                 <h4>Total Participantes</h4>
                 <p><b>10</b></p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-        <div class="widget-small danger coloured-icon">
-            <i class="icon fa fa-star fa-3x"></i>
-            <div class="info">
-                <h4>Stars</h4>
-                <p><b>500</b></p>
             </div>
         </div>
     </div>
@@ -63,9 +54,9 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 261.641px;">SL</th>
-                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 417.312px;">Event Name</th>
-                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 189.281px;">Start Time</th>
-                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;">End Time</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 417.312px;">Título do Evento</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 189.281px;">Tempo de Inicio</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;">Fim do Tempo</th>
                                         </tr>
                                     </thead>
                                     <tbody>

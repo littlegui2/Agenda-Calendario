@@ -26,7 +26,7 @@ class EventManager(models.Manager):
 class Event(EventAbstract):
     """ Event model """
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="events")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="eventos")
     title = models.CharField(max_length=200, unique=True)
     description = models.TextField()
     start_time = models.DateTimeField()
