@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "calendarapp.apps.CalendarappConfig",
     "accounts.apps.AccountsConfig",
+    "relatorio.apps.RelatorioConfig",
 ]
 
 MIDDLEWARE = [

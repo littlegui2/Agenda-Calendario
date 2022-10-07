@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+
+<title>{% block titulo %} Cadastros {% endblock %} </title>
+    
+        {% block content %}
+
+                {% if object.pk %}
+                    <h1 class="h3 my-3 text-dark">Editando Equipamento</h1>
+                {% else %}
+                    <h1 class="h3 my-3 text-dark">Cadastrar Equipamentos</h1>
+                {% endif %}
+
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        <div id="" class="col bg-white rounded p-2">
+                            {% csrf_token %}
+                            {{ form }}
+                            <div class="text-right col-md-12 ">        
+                                {% if object.pk %}
+                                <button type="submit" class=" save btn text-white" style="background:#198754;">
+                                    <i class="fas fa-save"></i>
+                                    Salvar 
+                                </button>
+                                <a class="btn text-white"  href="" style="background:#6c757d;">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Voltar
+                                </a>
+                                {% else %}
+                                <button type="submit" class="save btn text-white " style="background:#198754;">
+                                    <i class="fas fa-save"></i>
+                                    Salvar
+                                </button>
+                                <a class="btn btn-secondary"  href="" style="background:#6c757d;">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Voltar
+                                </a>
+                                {% endif %}
+        
+                            </div>
+                        </div> 
+                    </form>
+
+{% endblock content %}
+    

@@ -1,0 +1,102 @@
+{% extends 'base/base.html' %}
+
+<title>
+    {% block titulo %}Listagem de Alunos - UFAC{% endblock %}
+</title>
+{% block content %}
+    <div class="d-flex bd-highlight my-3">
+        <div class=" align-middle bd-highlight">
+            <h3>Alunos</h3>
+        </div>
+        <div class="ml-auto align-middle bd-highlight">
+            <a class="btn btn-primary"  href="../cadastro-cliente">
+                <i class="fas fa-plus"></i>
+                Novo Cadastro
+            </a>
+        </div>
+    </div>
+    <div class="bg-white p-4 rounded">
+        <table class="table table-sm table-bordered table-hover align-middle"
+               id="dataListagens"
+               width="100%"
+               cellspacing="0">
+            <thead class="">
+                <tr class="text-dark" style="background:#ebebeb;">
+                    <th class="text-center">Nome</th>
+                    <th class="text-center">Codigo do Cliente</th>
+                    <th class="text-center">Frequencia</th>
+                    <th class="text-center">Data</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in object_list %}   
+                    <tr>
+                        <td scope="row " 
+                            class="text-center align-middle">{{ item.nome }}</td>
+                        <td class="text-center align-middle">{{ item.codigo }}</td>
+                        <td class="text-center align-middle">{{ item.frequencia }}</td>
+                        <td class="text-center align-middle">{{ item.data }}</td>
+
+                        <td class="text-center align-middle" style="width:150px;">
+                            <div class="d-flex justify-content-center">
+                                <div class="mx-1">
+                                    <a href=""
+                                    class="btn btn-secondary"
+                                    style=" padding-top: 0.7rem; padding-bottom: 0.7rem; ">
+                                     <i class="fas fa-pen"></i>
+                                 </a>
+                                </div>
+                               
+                                <div class="mx-1">                                     
+                                    <button class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#excluiAluno"
+                                            style="padding-top: 1.2rem; padding-bottom: 1.2rem; padding-left: 1.2rem; padding-right: 1.2rem ">
+                                        <i class="fas fa-info"></i>
+                                    </button>
+                                </div>
+                                <div class="mx-1">                                     
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#excluiAluno"
+                                            style="padding-top: 0.7rem; padding-bottom: 0.7rem; ">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% empty %}
+                <tr>
+                    <td col="3"> Nada foi registrado </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="modal fade"
+         id="exampleModal"
+         tabindex="-1"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <input class="save btn btn-danger"
+                           type="submit"
+                           value="Sim"
+                           data-dismiss="modal"
+                           delete>
+                    {% comment %} <button type="submit" class="save btn btn-danger" data-dismiss="modal">sim</button>
+                    <button type="button" class="btn btn-primary">Save changes</button> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+   
+{% endblock content %}
+
