@@ -164,6 +164,20 @@
                         </li>
                     </ul>
                 </li>
+                <li class="treeview">
+                    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Relátorio</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a class="treeview-item" href="{% url 'relatorio:relatorio' %}"><i class="icon fa fa-circle-o"></i> Criar relátorio</a>
+                        </li>
+                        <li>
+                            <a class="treeview-item" href="{% url 'relatorio:relatorios' %}"><i class="icon fa fa-circle-o"></i> Agenda de ativades</a>
+                        </li>
+                        <li>
+                            <a class="treeview-item" href="{% url 'calendarapp:all_events' %}"><i class="icon fa fa-circle-o"></i> Lista de relátorios</a>
+                        </li>
+                    </ul>
+                </li>
                 <li>
                     <a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Relátorio</span></a>
                 </li>
@@ -193,11 +207,11 @@
 
     
     <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src={% static "vendor/datatables/jquery.dataTables.min.js" %}></script>
+    <script src={% static "vendor/datatables/dataTables.bootstrap4.min.js" %}></script>
 
     
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+    <script src={% static "js/demo/datatables-demo.js" %}></script>
     </body>
 </html>
