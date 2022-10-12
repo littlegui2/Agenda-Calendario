@@ -1,3 +1,4 @@
+from multiprocessing import get_context
 from django.forms import ModelForm
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView
@@ -10,6 +11,8 @@ class RelatorioCad(CreateView):
     fields = "__all__"
     template_name = 'cadastroRelatorio.html'
     success_url = reverse_lazy('relatorio:relatorios')
+
+    
     
 class RelatorioListagem(ListView):
     model = Relatorio

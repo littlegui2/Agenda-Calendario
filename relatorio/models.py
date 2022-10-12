@@ -1,9 +1,10 @@
 from enum import unique
 from tabnanny import verbose
-from tokenize import Number
+from tokenize import Number, blank_re
 from django.db import models
 from django.forms import CharField, DateField, IntegerField
 from phonenumber_field.modelfields import PhoneNumberField
+from traitlets import default
 #criação do relatorio 
 #criaçao do template da equipe
 #salvar como csv 
@@ -25,13 +26,14 @@ class Relatorio(models.Model):
         ("quinta","quinta"),
         ("sexta","sexta"),
     )
-    equipename = models.ForeignKey(Equipe, on_delete=models.CASCADE)
+    equipename = models.ForeignKey(Equipe,verbose_name="Nome da Equipe", on_delete=models.CASCADE, null=True, default=0)
     nome = models.CharField('Digite seu nome', max_length=32)
     email = models.EmailField('Digite seu email', max_length=32)
     codigo = models.IntegerField()
     frequencia = models.IntegerField()
     data = models.CharField(max_length=20, choices=STATUS_CHOICE, blank=False, null=False)
-    mes = models.CharField(max_length=10)
+    mes = models.CharField(max_length=10, blank =False, null=False, default='')
+    data_criacao = models.DateTimeField(auto_now_add=True)
     #definir horari que funcionario vai trabalhar
     def __str__(self):
         return self.nome
