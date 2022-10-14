@@ -20,6 +20,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- Main CSS-->
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
         <!-- Font-icon css-->
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
         {% block extracss %}
@@ -175,6 +177,17 @@
                         </li>
                         <li>
                             <a class="treeview-item" href="{% url 'calendarapp:all_events' %}"><i class="icon fa fa-circle-o"></i> Lista de relátorios</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Equipes</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a class="treeview-item" href="{% url 'relatorio:equipe' %}"><i class="icon fa fa-circle-o"></i> Criar equipes</a>
+                        </li>
+                        <li>
+                            <a class="treeview-item" href="{% url 'relatorio:equipes' %}"><i class="icon fa fa-circle-o"></i> Lista de equipes</a>
                         </li>
                     </ul>
                 </li>

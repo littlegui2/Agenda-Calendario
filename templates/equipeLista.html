@@ -1,65 +1,40 @@
 {% extends 'base/base.html' %}
 
-
+<title>
+    {% block titulo %}Listagem de Alunos - UFAC{% endblock %}
+</title>
 {% block content %}
     <div class="d-flex bd-highlight my-3">
         <div class=" align-middle bd-highlight">
-            <h3>Relátorios</h3>
+            <h3>Equipes</h3>
         </div>
         <div class="ml-auto align-middle bd-highlight">
-            <a class="btn btn-primary"  href="{% url 'relatorio:relatorio' %}">
+            <a class="btn btn-primary"  href="{% url 'relatorio:equipe' %}">
                 <i class="fas fa-plus"></i>
                 Novo Cadastro
             </a>
         </div>
     </div>
-    
-    
-        
-    </table>  
+    <div class="bg-white p-4 rounded">
         <table class="table table-sm table-bordered table-hover align-middle"
                id="dataListagens"
                width="100%"
                cellspacing="0">
             <thead class="thead-dark">
-                
                 <tr class="text-dark" style="background:#ebebeb;">
-                    <th class="text-center"> </th>
-                    <th class="text-center">Codigo do Cliente</th>
-                    <th class="text-center">Frequencia</th>
-                    <th class="text-center">Data</th>
-                    <th class="text-center">Mês</th>
+                    <th class="text-center">Nome</th>
+                    <th class="text-center">Codigo</th>
+                    <th class="text-center">Contato</th>
                     <th class="text-center">Ações</th>
                 </tr>
-                
             </thead>
-            
             <tbody>
-                <form action="" method="post" enctype="multipart/form-data"> 
-                <select class="form-control" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    
-                    {% for i in equipes %} 
-                    <option value="1">{{  i.nome }}</option>
-                   
-        
-                    {% endfor %}
-
-                </select>
-                <form>
-              
-                {% for item in relatorios %}   
-                  {{nome}}
-                  
+                {% for item in equipes %}
                     <tr>
-                        <td scope="row " 
-                            class="text-center align-middle">{{ item.equipe.nome }}</td>
-                        <td class="text-center align-middle">{{ item.codigo }}</td>
-                        <td class="text-center align-middle">{{ item.frequencia }}</td>
-                        <td class="text-center align-middle">{{ item.data_criacao | date:"l" }}</td>
-                        <td class="text-center align-middle">{{ item.mes }}</td>
+                        <td scope="row " class="text-center align-middle">{{ item.nome }}</td>
+                        <td class="text-center align-middle">{{ item.codigoV }}</td>
+                        <td class="text-center align-middle">{{ item.contato }}</td>
 
-                    
                         <td class="text-center align-middle" style="width:150px;">
                             <div class="d-flex justify-content-center">
                                 <div class="mx-1">
@@ -85,9 +60,7 @@
                         </td>
                     </tr>
                 {% empty %}
-                <tr>
-                    <td col="3"> Nada foi registrado </td>
-                </tr>
+                    Nada foi registrado
                 {% endfor %}
             </tbody>
         </table>
@@ -118,6 +91,4 @@
             </div>
         </div>
     </div>
-   
-{% endblock content %}
-
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+  
+   <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in info %}
+        {{ item }}
+        {% endfor %}
+    </tbody>
+  </table>
+ 
+   
+{% endblock content %}
+
