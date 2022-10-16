@@ -16,7 +16,15 @@
     
     
         
-    </table>  
+ 
+    <select class="player-dropdown">
+        <option >Open this select menu</option>
+        
+        {% for x in equipes %} 
+            <option value="1">{{  x.nome }}</option>
+        {% endfor %}
+
+    </select>
         <table class="table table-sm table-bordered table-hover align-middle"
                id="dataListagens"
                width="100%"
@@ -34,61 +42,12 @@
                 
             </thead>
             
-            <tbody>
-                <form action="" method="post" enctype="multipart/form-data"> 
-                <select class="form-control" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    
-                    {% for i in equipes %} 
-                    <option value="1">{{  i.nome }}</option>
-                   
-        
-                    {% endfor %}
-
-                </select>
-                <form>
+            <tbody class="details">
+               
               
-                {% for item in relatorios %}   
-                  {{nome}}
-                  
-                    <tr>
-                        <td scope="row " 
-                            class="text-center align-middle">{{ item.equipe.nome }}</td>
-                        <td class="text-center align-middle">{{ item.codigo }}</td>
-                        <td class="text-center align-middle">{{ item.frequencia }}</td>
-                        <td class="text-center align-middle">{{ item.data_criacao | date:"l" }}</td>
-                        <td class="text-center align-middle">{{ item.mes }}</td>
-
+               
                     
-                        <td class="text-center align-middle" style="width:150px;">
-                            <div class="d-flex justify-content-center">
-                                <div class="mx-1">
-                                    <button class="btn btn-info" data-toggle="modal" data-target="#excluiAluno"
-                                            style="padding: 10px 11px; ">
-                                        <i class="fa fa-pencil fa-2x"></i>
-                                    </button>
-                                </div>
-                               
-                                <div class="mx-1">                                     
-                                    <button class="btn btn-primary" data-toggle="modal" data-target="#excluiAluno"
-                                            style="padding: 10px 17px; ">
-                                        <i class="fas fa-info"></i>
-                                    </button>
-                                </div>
-                                <div class="mx-1">                                     
-                                    <button class="btn btn-danger" data-toggle="modal" data-target="#excluiAluno"
-                                            style="padding: 10px 13px;  ">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                {% empty %}
-                <tr>
-                    <td col="3"> Nada foi registrado </td>
-                </tr>
-                {% endfor %}
+                
             </tbody>
         </table>
     </div>

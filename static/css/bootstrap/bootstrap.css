@@ -40,6 +40,17 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+table.table-bordered{
+    border:1px solid blue;
+    margin-top:20px;
+  }
+table.table-bordered > thead > tr > th{
+    border:1px solid blue;
+}
+table.table-bordered > tbody > tr > td{
+    border:1px solid blue;
+}
+
 html {
   font-family: sans-serif;
   line-height: 1.15;

@@ -3,21 +3,191 @@
 
 {% block content %}
   
-   <table class="table table-dark">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-        {% for item in info %}
-        {{ item }}
-        {% endfor %}
-    </tbody>
-  </table>
+   
+      
+      <div class="">
+        <div class="table-responsive ">
+          <table class="table">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Equipe</th>
+                <th scope="col">Codigo da Equipe</th>
+                <th scope="col">Contato</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class=""><div class="" > {{ eq.nome }} </div></td>
+                <td>{{ eq.codigoV }}</td>
+                <td>@mdo</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table  table-responsive-lg d-lg-table table-striped ">
+                <thead class="thead-dark">
+                    <tr>
+                      <th class="text-center">
+                         Segunda
+               
+
+                      </th>
+                      <th class="text-center">Terça</th>
+                      <th class="text-center">Quarta</th>
+                      <th class="text-center">Quinta</th>
+                      <th class="text-center">Sexta</th>
+                      <th class="text-center">Sabádo</th>
+                    </tr>
+                </thead>
+                <tbody >
+                   
+                    <tr class="table-reponsive ">
+                      
+                        
+                          <td style="border:1px solid black;">
+                          
+                              {% for item in info %}
+                            {% if item.data == 'segunda' %}
+                            <table class="table table-bordered">
+                              <thead>
+                                <tr>
+                                  <th class=" col text-center">Codigo do Cliente</th>
+                                  <th scope="col"  class="text-center">Frequencia</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="text-center">{{ item.codigo }}</td>
+                                  <td class="text-center"> {{ item.frequencia }}</td>
+                                </tr>
+                              <tbody>
+                            </table>   
+                            {% endif %}
+
+                            {% endfor %}                         
+                          </td>
+                      
+                      
+                        <td style="border:1px solid black;">
+                          {% for item in info %}
+                          {% if item.data == 'terça' %}
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th class=" col text-center">Codigo do Cliente</th>
+                                <th scope="col"  class="text-center">Frequencia</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="text-center">{{ item.codigo }}</td>
+                                <td class="text-center"> {{ item.frequencia }}</td>
+                              </tr>
+                            <tbody>
+                          </table>                            
+                          {% endif %}
+                          {% endfor %}
+                        </td>
+                      <td style="border:1px solid black;">
+                          {% for item in info %}
+                          {% if item.data == 'quarta' %}
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th class=" col text-center">Codigo do Cliente</th>
+                                <th scope="col"  class="text-center">Frequencia</th>
+                              </tr>
+                            </thead>
+                            <tbody class="toast-body">
+                              <tr>
+                                <td class="text-center">{{ item.codigo }}</td>
+                                <td class="text-center"> {{ item.frequencia }}</td>
+                              </tr>
+                            <tbody>
+                          </table>                            
+                          {% endif %}
+                          {% endfor %}                        
+                        
+                        </td>
+                        <td style="border:1px solid black;">
+
+                          {% for item in info %}
+
+                          {% if item.data == 'quinta' %}
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th class=" col text-center">Codigo do Cliente</th>
+                                <th scope="col"  class="text-center">Frequencia</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="text-center">{{ item.codigo }}</td>
+                                <td class="text-center"> {{ item.frequencia }}</td>
+                              </tr>
+                            <tbody>
+                          </table>                            
+                          {% endif %}
+                          {% endfor %}
+                        </td>
+                        <td style="border:1px solid black;">
+                          {% for item in info %}
+
+                          {% if item.data == 'sexta' %}
+                          <table class="table table-bordered" >
+                            <thead>
+                              <tr>
+                                <th class=" col text-center">Codigo do Cliente</th>
+                                <th scope="col"  class="text-center">Frequencia</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="text-center">{{ item.codigo }}</td>
+                                <td class="text-center"> {{ item.frequencia }}</td>
+                              </tr>
+                            <tbody>
+                          </table>                            
+                          {% endif %}
+
+                          
+
+                          {% endfor %}
+                        </td>
+                        <td style="border:1px solid black;">
+                          {% for item in info %}
+
+                          {% if item.data == 'sabádo' %}
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th class=" col text-center">Codigo do Cliente</th>
+                                <th scope="col"  class="text-center">Frequencia</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="text-center">{{ item.codigo }}</td>
+                                <td class="text-center"> {{ item.frequencia }}</td>
+                              </tr>
+                            <tbody>
+                          </table>    
+                          {% else %}
+                                              
+                          {% endif %}
+                          
+                          {% endfor %}
+                        </td>
+                        
+                     </tr>                      
+                                  
+                </tbody>
+            </table>
+        </div>
+    </div>
+     
+
+
  
    
 {% endblock content %}
