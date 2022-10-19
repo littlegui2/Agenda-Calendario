@@ -1,8 +1,7 @@
 {% extends 'base/base.html' %}
 
-<title>
-    {% block titulo %}Listagem de Alunos - UFAC{% endblock %}
-</title>
+<title>{% block titulo %} Cadastros {% endblock %} </title>
+
 {% block content %}
     <div class="d-flex bd-highlight my-3">
         <div class=" align-middle bd-highlight">
@@ -44,11 +43,13 @@
                                     </button>
                                 </div>
                                
-                                <div class="mx-1">                                     
-                                    <button class="btn btn-primary" data-toggle="modal" data-target="#excluiAluno"
-                                            style="padding: 10px 17px; ">
-                                        <i class="fas fa-info"></i>
-                                    </button>
+                                <div class="mx-1">  
+                                    <a href="{% url 'relatorio:info' item.pk %}">                                  
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#excluiAluno"
+                                                style="padding: 10px 17px; "> 
+                                            <i class="fas fa-info"></i>
+                                        </button>
+                                    </a>
                                 </div>
                                 <div class="mx-1">                                     
                                     <button class="btn btn-danger" data-toggle="modal" data-target="#excluiAluno"
