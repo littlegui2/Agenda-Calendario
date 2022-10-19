@@ -1,15 +1,26 @@
+import io
 from multiprocessing import context, get_context
+from pipes import Template
+from re import template
+from urllib import response
 from webbrowser import get
 from django.forms import ModelForm
-from django.http import Http404, JsonResponse
+from django.http import FileResponse, Http404, JsonResponse
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
+from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Equipe, Relatorio
 import datetime
+from django.http import HttpResponse
+import csv
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+
 
 class RelatorioCad(CreateView):
     model = Relatorio
@@ -75,6 +86,10 @@ class EquipeCad(CreateView):
 class EquipeUpdate(UpdateView):
     modal = Equipe
     template_name = ''
+
+class Impview(TemplateView):
+    model = Relatorio
+    template_name = "imprimir.html"    
     
    
 def pagina_principal (request):
@@ -101,3 +116,84 @@ def search_vendor(request, pk):
         })
 
     return JsonResponse(data_array, safe=False)
+
+    # Generate CSV File Venue List
+def venue_csv(request):
+	response = HttpResponse(content_type='text/csv')
+	response['Content-Disposition'] = 'attachment; filename=venues.csv'
+	
+	# Create a csv writer
+	writer = csv.writer(response)
+
+	# Designate The Model
+	venues = Relatorio.objects.all()
+
+	# Add column headings to the csv file
+	writer.writerow(['Equipe Nome', 'Codigo', 'Frequencia', 'Data', 'Mes', 'Data Criação'])
+
+	# Loop Thu and output
+	for venue in venues:
+		writer.writerow([venue.equipeNome, venue.codigo, venue.frequencia, venue.data, venue.mes, venue.data_criacao])
+
+	return response
+
+
+# Generate Text File Venue List
+def venue_text(request):
+	response = HttpResponse(content_type='text/plain')
+	response['Content-Disposition'] = 'attachment; filename=venues.txt'
+	
+	lines = ["This is line 1\n", 
+	"This is line 2\n",
+	"This is line 3\n\n",
+	"John Elder Is Awesome!\n"]
+
+	# Write To TextFile
+	response.writelines(lines)
+	return response
+
+# Generate a PDF File Venue List
+def venue_pdf(request):
+	# Create Bytestream buffer
+	buf = io.BytesIO()
+	# Create a canvas
+	c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+	# Create a text object
+	textob = c.beginText()
+	textob.setTextOrigin(inch, inch)
+	textob.setFont("Helvetica", 14)
+
+	# Add some lines of text
+	#lines = [
+	#	"This is line 1",
+	#	"This is line 2",
+	#	"This is line 3",
+	#]
+	
+	# Designate The Model
+	venues = Relatorio.objects.all()
+
+	# Create blank list
+	lines = []
+
+	for venue in venues:
+		lines.append(venue.equipeNome)
+		lines.append(venue.codigo)
+		lines.append(venue.frequencia)
+		lines.append(venue.data)
+		lines.append(venue.mes)
+		lines.append(venue.data_criacao)
+		lines.append(" ")
+
+	# Loop
+	for line in lines:
+		textob.textLine(line)
+
+	# Finish Up
+	c.drawText(textob)
+	c.showPage()
+	c.save()
+	buf.seek(0)
+
+	# Return something
+	return FileResponse(buf, as_attachment=True, filename='venue.pdf')  
