@@ -4,6 +4,7 @@ from tokenize import Number, blank_re
 from django.db import models
 from django.forms import CharField, DateField, IntegerField
 from phonenumber_field.modelfields import PhoneNumberField
+from accounts.models.user import User
 #criação do relatorio 
 #criaçao do template da equipe
 #salvar como csv 
@@ -13,7 +14,6 @@ class Equipe(models.Model):
     nome = models.CharField('Digite o nome da equipe', max_length=32, unique = True)
     codigoV = models.CharField('Digite o codigo do vendedor', max_length=32)
     contato = PhoneNumberField(region="BR",unique = True, null = False, blank = False,  help_text='Insira um número válido.')
-    
     def __str__(self):
         return self.nome
     

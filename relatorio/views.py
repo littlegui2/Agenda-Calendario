@@ -82,7 +82,6 @@ class EquipeCad(CreateView):
     success_url = reverse_lazy('relatorio:equipes')
 
 
-
 class EquipeUpdate(UpdateView):
     modal = Equipe
     template_name = ''
