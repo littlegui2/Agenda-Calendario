@@ -28,7 +28,7 @@
         </div>
     </div>
     </a>
-    <a href="#" class="btn" style="">
+    <a href="{% url 'relatorio:equipes' %}" class="btn col-md-4" style="">
     <div class="">
         <div class="widget-small info coloured-icon">
             <i class="icon fa fa-users fa-3x"></i>
@@ -38,8 +38,8 @@
             </div>
         </div>
     </div>
-    
-    <a href="#" class="btn" style="">
+        </a>
+    <!--<a href="#" class="btn" style="">
     <div class="">
         <div class="widget-small warning coloured-icon">
             <i class="icon fa fa-thumbs-o-up fa-3x"></i>
@@ -50,6 +50,7 @@
         </div>
     </div>
     </a>
+    -->
     <div class="col-md-12">
         <div class="tile">
             <div class="tile-body">
@@ -60,14 +61,21 @@
                                 <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 261.641px;">SL</th>
-                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 417.312px;">Título do Evento</th>
-                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 189.281px;">Tempo de Inicio</th>
-                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;">Fim do Tempo</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 261.641px;">Equipe</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 417.312px;">Codigo do Cliente</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 189.281px;">Frequência</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;">Tempo de criação</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+                                        {% for item in rela %}
+                                        <tr role="row">
+                                            <td> {{ item.equipeNome.nome}} </td>
+                                            <td> {{ item.codigo}} </td>
+                                            <td> {{ item.frequencia }}</td>
+                                            <td> {{ item.data_criacao }} </td>
+                                        </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
