@@ -4,7 +4,7 @@ from django.urls import path, include
 
 from relatorio.models import Equipe
 
-from relatorio.views import Impview, RelatorioCad, relatorioLista, EquipeCad, relatorios_d, RelatorioInfo, equipeLista, RelatorioUpdate,RelatorioDelete,pagina_principal, venue_pdf,venue_csv, venue_text
+from relatorio.views import Impview, RelatorioCad, relatorioLista, EquipeCad, relatorios_d, RelatorioInfo, equipeLista, RelatorioUpdate,RelatorioDelete,pagina_principal,venue_csv
 
 app_name = 'relatorio'
 
@@ -19,6 +19,4 @@ urlpatterns = [
     path('', pagina_principal, name='pagina-principal' ),
     path('imprimir/', Impview.as_view(), name='imprimir' ),
     path('venue_csv/', venue_csv , name='venue_csv'),
-    path('venue_text/', venue_text , name='venue_text'),
-    path('venue_pdf/', venue_pdf , name='venue_pdf')
 ]

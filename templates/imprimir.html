@@ -2,8 +2,15 @@
 {% load static%}
 
 {% block content %}
-   
+<form action="?" method="get">
+    <input type="text" name="mes" id="" value="{{request.GET.mes}}" class="p-1 border" placeholder="Mes do relatorio">
+    <a href="{% url 'relatorio:venue_csv' %}">                                 
+        <button class="btn btn-primary" data-toggle="modal" data-target="#excluiAluno"
+                style="padding: 10px 17px;"> 
+            <i>Gerar Relatorio</i>
+        </button>
+    </a>
+    
 
-<input type="submit" class="btn btn-info right" href="{% url 'relatorio:equipe' %}"></input>
-
+</form>
 {% endblock content %}

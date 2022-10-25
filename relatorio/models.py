@@ -34,7 +34,8 @@ class Relatorio(models.Model):
     mes = models.CharField(max_length=10, blank =False, null=False, default='Escolha um mês')
     data_criacao = models.DateTimeField(auto_now_add=True, null=True)
     #definir horari que funcionario vai trabalhar
+    
     def __str__(self):
-        return self.equipeNome
+       return self.equipeNome,self.mes
 
     # Create your models here.

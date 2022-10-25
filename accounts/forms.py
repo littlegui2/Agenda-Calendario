@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.contrib.auth.password_validation import validate_password
+
 
 from accounts.models import User
 
@@ -16,12 +16,12 @@ class SignUpForm(forms.ModelForm):
     password1 = forms.CharField(
         label="Password",
         widget=forms.PasswordInput(attrs={"class": "form-control"}),
-        validators=[validate_password],
+        
     )
     password2 = forms.CharField(
         label="Confirm Password",
         widget=forms.PasswordInput(attrs={"class": "form-control"}),
-        validators=[validate_password],
+        
     )
 
     class Meta:

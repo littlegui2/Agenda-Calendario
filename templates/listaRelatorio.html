@@ -16,17 +16,14 @@
         </div>
     </div>
     
-    
+    <form action="?" method="get">
+        <input type="text" name="mes" id="" value="{{request.GET.mes}}" class="p-1 border" placeholder="Mes do relatorio">
+        <button type="submit" class="btn-success">Buscar</button>
+        <a href="{% url 'relatorio:relatorios' %}" class="btn">Limpar</a>
         
- 
-    <select class="player-dropdown">
-        <option >Open this select menu</option>
-        
-        {% for x in equipes %} 
-            <option value="1">{{  x.nome }}</option>
-        {% endfor %}
 
-    </select>
+    </form>
+
         <table class="table table-sm table-bordered table-hover align-middle"
                id="dataListagens"
                width="100%"
@@ -34,7 +31,7 @@
             <thead class="thead-dark">
                 
                 <tr class="text-dark" style="background:#ebebeb;">
-                    <th class="text-center"> </th>
+                    <th class="text-center">Vendedor</th>
                     <th class="text-center">Codigo do Cliente</th>
                     <th class="text-center">Frequencia</th>
                     <th class="text-center">Data</th>
@@ -43,13 +40,19 @@
                 </tr>
                 
             </thead>
-            
             <tbody class="details">
-               
-              
-               
-                    
-                
+                {% for item in relatorios %}
+              <tr>
+                <td class="text-center"> {{ item.equipeNome }} </td>
+                <td class="text-center"> {{ item.codigo }}</td>
+                <td class="text-center"> {{ item.frequencia }}</td>
+                <td class="text-center"> {{ item.data }}</td>
+                <td class="text-center"> {{ item.mes }}</td>
+                <td class="text-center"> {{ item.data_criacao }}</td>
+              </tr>
+              {% empty %}
+                    Nada foi registrado
+              {% endfor %}
             </tbody>
         </table>
     </div>
