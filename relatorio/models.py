@@ -24,14 +24,28 @@ class Relatorio(models.Model):
         ("quarta","Quarta-feira"),
         ("quinta","Quinta-feira"),
         ("sexta","Sexta-feira"),
-        ("sabádo","Sabado")
-
+        ("sabado","Sabado")
+    )
+    STATUS_CHOICE1 = (
+        ("janeiro","Janeiro"),
+        ("fevereiro","Fevereiro"),
+        ("marco","Março"),
+        ("abril","Abril"),
+        ("maio","maio"),
+        ("junho","Junho"),
+        ("julho","Julho"),
+        ("agosto","Agosto"),
+        ("setembro","Setembro"),
+        ("outubro","Outubro"),
+        ("novembro","Novembro"),
+        ("dezembro","Dezembro"),
+        
     )
     equipeNome = models.ForeignKey(Equipe,verbose_name="Nome da Equipe", on_delete=models.CASCADE, null=True, default=0)
     codigo = models.IntegerField()
     frequencia = models.IntegerField()
     data = models.CharField(max_length=20, choices=STATUS_CHOICE, blank=False, null=False)
-    mes = models.CharField(max_length=10, blank =False, null=False, default='Escolha um mês')
+    mes = models.CharField(max_length=10,choices=STATUS_CHOICE1, blank =False, null=False, default='Escolha um mês')
     data_criacao = models.DateTimeField(auto_now_add=True, null=True)
     #definir horari que funcionario vai trabalhar
     

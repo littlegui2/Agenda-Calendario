@@ -123,24 +123,24 @@ def search_vendor(request, pk):
 
     # Generate CSV File Venue List
 def venue_csv(request):
-	response = HttpResponse(content_type='text/csv')
-	response['Content-Disposition'] = 'attachment; filename=venues.csv'
+        dados = request.GET.get('mes')
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=venues.csv'
 	
 	# Create a csv writer
-	writer = csv.writer(response)
+        writer = csv.writer(response)
 
 	# Designate The Model
     
-	venues = Relatorio.objects.all()
+        venues = Relatorio.objects.filter(mes__icontains=dados)
 
 	# Add column headings to the csv file
-	writer.writerow(['Equipe Nome', 'Codigo', 'Frequencia', 'Data', 'Mes', 'Data Criação'])
-
+        writer.writerow(['Equipe Nome', 'Codigo', 'Frequencia', 'Data', 'Mes', 'Data Criacao'])     
 	# Loop Thu and output
-	for venue in venues:
-		writer.writerow([venue.equipeNome, venue.codigo, venue.frequencia, venue.data, venue.mes, venue.data_criacao])
+        for venue in venues:
+              writer.writerow([venue.equipeNome, venue.codigo, venue.frequencia, venue.data, venue.mes, venue.data_criacao])
 
-	return response
+        return response
 
 
 
