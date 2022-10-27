@@ -36,10 +36,7 @@
             <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
             <!-- Navbar Right Menu-->
             <ul class="app-nav">
-                <li class="app-search">
-                    <input class="app-search__input" type="search" placeholder="Search" />
-                    <button class="app-search__button"><i class="fa fa-search"></i></button>
-                </li>
+               
                 <!--Notification Menu
                 <li class="dropdown">
                     <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"></i></a>
@@ -124,12 +121,13 @@
                 <li class="dropdown">
                     <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
                     <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                        <li>
+                       <!-- <li>
                             <a class="dropdown-item" href="#"><i class="fa fa-cog fa-lg"></i> Configurações</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#"><i class="fa fa-user fa-lg"></i> Perfil</a>
                         </li>
+                        -->
                         <li>
                             <a class="dropdown-item" href="{% url 'accounts:signout' %}"><i class="fa fa-sign-out fa-lg"></i> Logout</a>
                         </li>
@@ -176,6 +174,7 @@
                         </li>
                     </ul>
                 </li>
+                {% if request.user.is_superuser %}
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Equipes</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                     <ul class="treeview-menu">
@@ -187,6 +186,7 @@
                         </li>
                     </ul>
                 </li>
+                {% endif %}
                 <li>
                     <a class="app-menu__item" href="{% url 'relatorio:imprimir' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Relátorio</span></a>
                 </li>

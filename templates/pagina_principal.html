@@ -6,19 +6,15 @@
 {% block breadcrumb %}
 
     <div>
-        <h1><i class="fa fa-dashboard"></i> Página Principal</h1>
-        <p>Eventos</p>
+        <h1><i class="fa fa-home fa-lg"></i></i> Página Principal</h1>
     </div>
-    <ul class="app-breadcrumb breadcrumb">
-        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-        <li class="breadcrumb-item"><a href="#">Página Principal</a></li>
+
     </ul>
 {% endblock breadcrumb %}
 
 {% block content %}
 <div class="row d-inline">
-    <a href="#" class="btn" style="">
-    <div class="">
+    <div class="btn">
         <div class="widget-small primary coloured-icon">
             <i class="icon fa fa-files-o fa-3x"></i>
             <div class="info">
@@ -27,18 +23,30 @@
             </div>
         </div>
     </div>
-    </a>
-    <a href="{% url 'relatorio:equipes' %}" class="btn col-md-4" style="">
+    
+    <a href="{% url 'relatorio:relatorios' %}" class="btn col-md-4" style="">
     <div class="">
         <div class="widget-small info coloured-icon">
-            <i class="icon fa fa-users fa-3x"></i>
+            <i class="icon fa fa-list fa-3x"></i>
             <div class="info">
-                <h4>Total de Equipes</h4>
-                <p><b> {{ equipes }} </b></p>
+                <h4>Lista de Relátorios</h4>
+                
             </div>
         </div>
     </div>
         </a>
+        <a href="{% url 'relatorio:relatorio' %}" class="btn col-md-4" style="">
+            <div class="">
+                <div class="widget-small info coloured-icon">
+                    <i class="icon fa fa-clipboard fa-3x " ></i>
+                    <div class="info">
+                        <h4>Criar relátorios</h4>
+                        
+                    </div>
+                </div>
+            </div>
+                </a>
+                
     <!--<a href="#" class="btn" style="">
     <div class="">
         <div class="widget-small warning coloured-icon">

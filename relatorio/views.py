@@ -13,6 +13,9 @@ from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+
+from accounts.models.user import User
+from relatorio.forms import EquipeForm
 from .models import Equipe, Relatorio
 import datetime
 from django.http import HttpResponse
@@ -22,23 +25,39 @@ import csv
 
 class RelatorioCad(CreateView):
     model = Relatorio
-    fields = "__all__"
+    fields = [ "codigo", "frequencia", "data","mes"]
     template_name = 'cadastroRelatorio.html'
     success_url = reverse_lazy('relatorio:relatorios')
+    
+    def form_valid(self, form) -> HttpResponse:
+        
+        form.instance.usuario  =  self.request.user
+        
+        url=  super().form_valid(form)
+        
+        return url
 
     
 def relatorioLista(request):
-    
+            
    # relatorios = Relatorio.objects.order_by('data_criacao')
-    equipes = Equipe.objects.all()
-    total_equipe = equipes.count()
-    txt = request.GET.get('mes')
-    relatorios = Relatorio.objects.all()
-    if txt:
-       relatorios = Relatorio.objects.filter(mes__icontains=txt)
-    else:
-       relatorios = Relatorio.objects.all()    
-    context= {'relatorios':relatorios, 'equipes': equipes}
+    
+    if request.user.is_superuser:
+        relatorios = Relatorio.objects.all()   
+        equipes = Equipe.objects.all()
+        context= {'relatorios':relatorios, 'equipes': equipes}
+    else: 
+
+        equipes = Equipe.objects.all()
+        total_equipe = equipes.count()
+        txt = request.GET.get('mes')
+        if txt:
+            relatorios = Relatorio.objects.filter(usuario = request.user,mes__icontains=txt)
+        else:
+            relatorios = Relatorio.objects.filter(usuario = request.user)    
+        context= {'relatorios':relatorios, 'equipes': equipes}
+   
+
     return render(request, 'listaRelatorio.html', context)
     
      
@@ -49,25 +68,21 @@ def equipeLista(request):
     context = {'equipes': equipes}
     return render(request,'equipeLista.html', context )
 
-def relatorios_d (request, chave):
+def relatorios_d ( request, chave, x ):
+    
     try: 
-        equipe = Equipe.objects.get(pk=chave)
+        relat = Relatorio.objects.get(pk=chave)
     except Relatorio.DoesNotExist:
         raise Http404('O relátorio não existe')
     eq = Equipe.objects.all()
-    relatoriox = equipe.relatorio_set.all()
-    context = {'info': relatoriox, 'eq': equipe}
+    
+    relatoriox = relat.object.filter(usuario = request.user,mes=x )
+    me = x
+    context = {'info': relatoriox, 'm':me}
     return render(request,'relatorioInfo.html',context)
 
-class RelatorioInfo(DetailView):
-    model = Relatorio
-    template_name = 'relatorioInfo.html'
-    context_object_name = 'relatorios'
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)        
-        post = Relatorio.objects.get(id=equipe)
-        post.update(count=('count') +1)
-        return context
+     
+
     
 class RelatorioUpdate(LoginRequiredMixin,UpdateView):
     model = Relatorio
@@ -75,29 +90,76 @@ class RelatorioUpdate(LoginRequiredMixin,UpdateView):
     template_name = 'cadastroRelatorio.html'
     success_url = reverse_lazy('relatorio:relatorios')
 
-class RelatorioDelete(LoginRequiredMixin,UpdateView):
+class RelatorioDelete(LoginRequiredMixin,DeleteView):
     model = Relatorio
     success_url = reverse_lazy('relatorio:relatorios')
+    template_name = 'cadastroRelatorio.html'
 
+def relatorios_d ( request, chave, x ):
+    try: 
+        user = User.objects.get(pk=request.user.id)
+    except Relatorio.DoesNotExist:
+        raise Http404('O relátorio não existe')
+    eq = Equipe.objects.all()
+    
+    relatoriox = user.relatorio_set.filter(usuario = request.user,mes=x )
+    me = x
+    equipe = user.equipe_set.all()
+    context = {'info': relatoriox, 'eq': equipe, 'm':me}
+    return render(request,'relatorioInfo.html',context)
+
+    
     
 class EquipeCad(CreateView):
     model = Equipe
-    fields = ['nome','codigoV','contato']
+    form_class = EquipeForm
     template_name = 'cadastroEquipe.html'
     success_url = reverse_lazy('relatorio:equipes')
-
+    
+    def get_form_kwargs(self):
+        
+        kwargs = super(EquipeCad, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+    
 
 class EquipeUpdate(UpdateView):
     modal = Equipe
-    template_name = ''
+    template_name = 'cadastroEquipe.html'
+    success_url = reverse_lazy('relatorio:equipes')
+    form_class = EquipeForm
+    
+    def get_form_kwargs(self):
+        
+        kwargs = super(EquipeUpdate, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+    
+    
+    def get_queryset(self):
+        item = Equipe.objects.all()
+        
+        return item
 
+    
+class EquipeDelete(DeleteView):
+    modal = Equipe
+    template_name = 'cadastroEquipe.html'
+    success_url = reverse_lazy('relatorio:equipes')
+    def get_queryset(self):
+        item = Equipe.objects.all()
+        
+        return item
+    
 class Impview(TemplateView):
     model = Relatorio
     template_name = "imprimir.html"    
     
    
 def pagina_principal (request):
-    relatorios_total = Relatorio.objects.all().count()
+    
+    relatorios = Relatorio.objects.filter(usuario = request.user)
+    relatorios_total = relatorios.count()
     equipes_total = Equipe.objects.all().count()
     
     context = {'relatorios': relatorios_total, 'equipes': equipes_total}

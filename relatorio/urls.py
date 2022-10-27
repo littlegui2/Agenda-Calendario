@@ -4,7 +4,7 @@ from django.urls import path, include
 
 from relatorio.models import Equipe
 
-from relatorio.views import Impview, RelatorioCad, relatorioLista, EquipeCad, relatorios_d, RelatorioInfo, equipeLista, RelatorioUpdate,RelatorioDelete,pagina_principal,venue_csv
+from relatorio.views import EquipeDelete, EquipeUpdate, Impview, RelatorioCad, relatorioLista, EquipeCad, relatorios_d, equipeLista, RelatorioUpdate,RelatorioDelete,pagina_principal,venue_csv
 
 app_name = 'relatorio'
 
@@ -12,8 +12,10 @@ urlpatterns = [
     path("relatorio/", RelatorioCad.as_view(), name="relatorio"),
     path("relatorios/", relatorioLista, name="relatorios"),
     path("equipe/", EquipeCad.as_view(), name="equipe"),
-    path('relatorios/<str:chave>/', relatorios_d, name="info" ),
+    path('relatorios/<str:chave>/<str:x>', relatorios_d, name="info" ),
     path("equipes/",equipeLista, name="equipes"),
+    path('equipes-udpate/<int:pk>/', EquipeUpdate.as_view(), name="equipe-up"),
+    path('equipes-delete/<int:pk>/', EquipeDelete.as_view(), name="equipe-del"),
     path('relatorios-udpate/<int:pk>/', RelatorioUpdate.as_view(), name="relatorio-up"),
     path('relatrorios-delete/<int:pk>/', RelatorioDelete.as_view(), name="relatorio-del"),
     path('', pagina_principal, name='pagina-principal' ),

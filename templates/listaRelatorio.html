@@ -48,7 +48,59 @@
                 <td class="text-center"> {{ item.frequencia }}</td>
                 <td class="text-center"> {{ item.data }}</td>
                 <td class="text-center"> {{ item.mes }}</td>
-                <td class="text-center"> {{ item.data_criacao }}</td>
+                <td class="text-center align-middle" style="width:150px;">
+                    <div class="d-flex justify-content-center">
+                        <div class="mx-1">
+                            <a href="{% url "relatorio:relatorio-up" item.pk %}">
+                            <button class="btn btn-info" 
+                                    style="padding: 10px 11px; ">
+                                <i class="fa fa-pencil fa-2x"></i>
+                            </button>
+                             </a>
+                        </div>
+                       
+                        <div class="mx-1">  
+                            <a href="{% url "relatorio:info" item.pk item.mes %}">                                  
+                                <button class="btn btn-primary"
+                                        style="padding: 10px 17px; "> 
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="mx-1">                                     
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#excluiAluno"
+                                    style="padding-top: 0.7rem; padding-bottom: 0.7rem; ">
+
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="excluiAluno" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                    <!-- Modal content-->
+                                    <div class="modal-content align-content-center">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4 class="modal-title">Deseja deletar {{ item.nome }}?</h4>
+                                            <img src="">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="{% url 'relatorio:relatorio-del' item.pk %}" method="POST">
+                                                {% csrf_token %}
+                                                <button class="btn btn-danger alert-danger">Delete</button>
+                                            </form>
+                                            <button type="button" class="btn btn-default alert-dark" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </td>
               </tr>
               {% empty %}
                     Nada foi registrado
@@ -56,32 +108,7 @@
             </tbody>
         </table>
     </div>
-    <div class="modal fade"
-         id="exampleModal"
-         tabindex="-1"
-         aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body"></div>
-                <div class="modal-footer">
-                    <input class="save btn btn-danger"
-                           type="submit"
-                           value="Sim"
-                           data-dismiss="modal"
-                           delete>
-                    {% comment %} <button type="submit" class="save btn btn-danger" data-dismiss="modal">sim</button>
-                    <button type="button" class="btn btn-primary">Save changes</button> {% endcomment %}
-                </div>
-            </div>
-        </div>
-    </div>
+    
    
 {% endblock content %}
 

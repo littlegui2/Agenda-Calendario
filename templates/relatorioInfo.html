@@ -3,8 +3,8 @@
 
 {% block content %}
   
-   
       
+      <div class="text-uppercase display-4 "> {{ m }}</div>
       <div class="">
         <div class="table-responsive ">
           <table class="table">
@@ -17,9 +17,11 @@
             </thead>
             <tbody>
               <tr>
-                <td class=""><div class="" > {{ eq.nome }} </div></td>
-                <td>{{ eq.codigoV }}</td>
-                <td>{{ eq.contato}}</td>
+               {% for equipe in eq %}
+                <td class=""><div class="" > {{ equipe.nome }} </div></td>
+                <td>{{ equipe.codigoV }}</td>
+                <td>{{ equipe.contato}}</td>
+                {% endfor %}
               </tr>
             </tbody>
           </table>
