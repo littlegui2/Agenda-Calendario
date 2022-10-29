@@ -49,7 +49,7 @@ class Relatorio(models.Model):
     frequencia = models.IntegerField()
     data = models.CharField(max_length=20, choices=STATUS_CHOICE, blank=False, null=False)
     mes = models.CharField(max_length=10,choices=STATUS_CHOICE1, blank =False, null=False, default='Escolha um mês')
-
+    
     data_criacao = models.DateTimeField(auto_now_add=True, null=True)
    
     #definir horari que funcionario vai trabalhar
