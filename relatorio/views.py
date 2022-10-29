@@ -13,6 +13,7 @@ from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 from accounts.models.user import User
 from relatorio.forms import EquipeForm
@@ -23,7 +24,8 @@ import csv
 
 
 
-class RelatorioCad(CreateView):
+class RelatorioCad(CreateView, LoginRequiredMixin):
+    login_url = '/signup/'
     model = Relatorio
     fields = [ "codigo", "frequencia", "data","mes"]
     template_name = 'cadastroRelatorio.html'
@@ -68,20 +70,7 @@ def equipeLista(request):
     context = {'equipes': equipes}
     return render(request,'equipeLista.html', context )
 
-def relatorios_d ( request, chave, x ):
-    
-    try: 
-        relat = Relatorio.objects.get(pk=chave)
-    except Relatorio.DoesNotExist:
-        raise Http404('O relátorio não existe')
-    eq = Equipe.objects.all()
-    
-    relatoriox = relat.object.filter(usuario = request.user,mes=x )
-    me = x
-    context = {'info': relatoriox, 'm':me}
-    return render(request,'relatorioInfo.html',context)
 
-     
 
     
 class RelatorioUpdate(LoginRequiredMixin,UpdateView):
@@ -155,7 +144,7 @@ class Impview(TemplateView):
     model = Relatorio
     template_name = "imprimir.html"    
     
-   
+@login_required(login_url='/signin/')
 def pagina_principal (request):
     
     relatorios = Relatorio.objects.filter(usuario = request.user)
@@ -166,23 +155,6 @@ def pagina_principal (request):
     return render(request,'pagina_principal.html', context)
    
     
-def search_vendor(request, pk):
-    data_array = []
-    rela = Relatorio.objects.all()
-    try:
-        player = Relatorio.objects.get(pk=pk)
-    except Relatorio.DoesNotExists:
-        player = None
-
-    if player:
-        data_array.append({
-        'fist_name': 'oi',
-        'last_name': 'oi',
-        'age':'eae'
-        })
-
-    return JsonResponse(data_array, safe=False)
-
     # Generate CSV File Venue List
 def venue_csv(request):
         dados = request.GET.get('mes')
@@ -197,10 +169,10 @@ def venue_csv(request):
         venues = Relatorio.objects.filter(mes__icontains=dados)
 
 	# Add column headings to the csv file
-        writer.writerow(['Equipe Nome', 'Codigo', 'Frequencia', 'Data', 'Mes', 'Data Criacao'])     
+        writer.writerow(['Usuario', 'Codigo', 'Frequencia', 'Data', 'Mes', 'Data Criacao'])     
 	# Loop Thu and output
         for venue in venues:
-              writer.writerow([venue.equipeNome, venue.codigo, venue.frequencia, venue.data, venue.mes, venue.data_criacao])
+              writer.writerow([venue.usuario, venue.codigo, venue.frequencia, venue.data, venue.mes, venue.data_criacao])
 
         return response
 

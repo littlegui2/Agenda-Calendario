@@ -9,7 +9,7 @@ from relatorio.views import EquipeDelete, EquipeUpdate, Impview, RelatorioCad, r
 app_name = 'relatorio'
 
 urlpatterns = [
-    path("relatorio/", RelatorioCad.as_view(), name="relatorio"),
+    path("relatorio/", RelatorioCad.as_view() , name="relatorio"),
     path("relatorios/", relatorioLista, name="relatorios"),
     path("equipe/", EquipeCad.as_view(), name="equipe"),
     path('relatorios/<str:chave>/<str:x>', relatorios_d, name="info" ),

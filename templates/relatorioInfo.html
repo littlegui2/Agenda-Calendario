@@ -2,9 +2,19 @@
 
 
 {% block content %}
-  
+<div class="d-flex bd-highlight my-3">
+  <div class=" align-middle bd-highlight">
+    <div class="text-uppercase display-4 "> {{ m }}</div>
+  </div>
+  <div class="ml-auto align-middle bd-highlight">
+      <a class="btn btn-primary"  href="{% url 'relatorio:relatorios' %}">
+          <i class="fas fa-plus"></i>
+          Lista de Relátorios
+      </a>
+  </div>
+</div>
       
-      <div class="text-uppercase display-4 "> {{ m }}</div>
+      
       <div class="">
         <div class="table-responsive ">
           <table class="table">

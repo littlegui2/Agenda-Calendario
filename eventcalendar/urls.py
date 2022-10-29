@@ -19,7 +19,7 @@ from .views import DashboardView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("accounts/", include("accounts.urls")),
+    path("", include("accounts.urls")),
     path("", include("calendarapp.urls")),
     path("", include("relatorio.urls")),
 ]
