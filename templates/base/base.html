@@ -139,10 +139,14 @@
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
         <aside class="app-sidebar">
             <div class="app-sidebar__user">
-                <img class="app-sidebar__user-avatar" src="{% static 'images/recol.png' %}" alt="User Image" height="50px" width="50px"/>
+                <img class="m-1" src="{% static 'images/recol.png' %}" alt="User Image" height="50px" width="50px"/>
                 <div>
-                    <p class="app-sidebar__user-name">Grupo Recol</p>
-                    <p class="app-sidebar__user-designation">Funcionário</p>
+                    
+                    <h1 class="app-sidebar__user-name text-lg text">Grupo Recol</h1>
+                    <div style="height: 1px;
+                     background: white;">  </div>
+                    {% block nome%}
+                    {% endblock nome %}
                 </div>
             </div>
             <ul class="app-menu">
@@ -174,7 +178,7 @@
                         </li>
                     </ul>
                 </li>
-                {% if request.user.is_superuser %}
+                
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Equipes</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                     <ul class="treeview-menu">
@@ -186,7 +190,7 @@
                         </li>
                     </ul>
                 </li>
-                {% endif %}
+           
                 <li>
                     <a class="app-menu__item" href="{% url 'relatorio:imprimir' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Relátorio</span></a>
                 </li>

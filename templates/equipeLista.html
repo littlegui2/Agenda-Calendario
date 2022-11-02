@@ -23,15 +23,15 @@
                 <tr class="text-dark" style="background:#ebebeb;">
                     <th class="text-center">Nome</th>
                     <th class="text-center">Codigo</th>
-                    <th class="text-center">Contato</th>
+                    <th class="text-center">{{ equipe}}</th>
                     <th class="text-center">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in equipes %}
                     <tr>
-                        <td scope="row " class="text-center align-middle">{{ item.nome }}</td>
-                        <td class="text-center align-middle">{{ item.codigoV }}</td>
+                        <td scope="row " class="text-center align-middle">{{ item.gestor.user.nome }}</td>
+                        <td class="text-center align-middle"></td>
                         <td class="text-center align-middle">{{ item.contato }}</td>
 
                         <td class="text-center align-middle" style="width:150px;">

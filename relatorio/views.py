@@ -1,25 +1,15 @@
-import io
-from multiprocessing import context, get_context
-from pipes import Template
-from re import template
-from urllib import response
-from webbrowser import get
-from django.forms import ModelForm
-from django.http import FileResponse, Http404, JsonResponse
+from django.http import Http404
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic.list import ListView
 from django.views.generic import TemplateView
-from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
-
-from accounts.models.user import User
+from accounts.models.user import Gestor, User
 from relatorio.forms import EquipeForm
 from .models import Equipe, Relatorio
-import datetime
 from django.http import HttpResponse
+from django.contrib.auth import get_user
 import csv
 
 
@@ -27,7 +17,7 @@ import csv
 class RelatorioCad(CreateView, LoginRequiredMixin):
     login_url = '/signup/'
     model = Relatorio
-    fields = [ "codigo", "frequencia", "data","mes"]
+    fields = [ "codigo_cliente","frequencia", "data","mes"]
     template_name = 'cadastroRelatorio.html'
     success_url = reverse_lazy('relatorio:relatorios')
     
@@ -65,12 +55,6 @@ def relatorioLista(request):
      
     
 
-def equipeLista(request):
-    equipes = Equipe.objects.all()
-    context = {'equipes': equipes}
-    return render(request,'equipeLista.html', context )
-
-
 
     
 class RelatorioUpdate(LoginRequiredMixin,UpdateView):
@@ -94,7 +78,7 @@ def relatorios_d ( request, chave, x ):
     relatoriox = user.relatorio_set.filter(usuario = request.user,mes=x )
     me = x
     equipe = user.equipe_set.all()
-    context = {'info': relatoriox, 'eq': equipe, 'm':me}
+    context = {'info': relatoriox, 'eq': equipe, 'm':me, "usuario":user}
     return render(request,'relatorioInfo.html',context)
 
     
@@ -111,7 +95,26 @@ class EquipeCad(CreateView):
         kwargs['request'] = self.request
         return kwargs
     
+    def form_valid(self, form):
+        
+        gest = Gestor.objects.get(user_id = self.request.user.id)
+        form.instance.gestor = gest
+        
+        url=  super().form_valid(form)
+        
+        return url
+    
 
+def equipeLista(request):
+    gest = Gestor.objects.get(user_id = request.user.id)
+
+    equipes = Equipe.objects.filter(gestor=gest)
+    equipe = ""
+    context = {'equipes': equipes, "equipe": equipe}
+    return render(request,'equipeLista.html', context )
+
+
+   
 class EquipeUpdate(UpdateView):
     modal = Equipe
     template_name = 'cadastroEquipe.html'
@@ -140,6 +143,10 @@ class EquipeDelete(DeleteView):
         
         return item
     
+def listaFuncionario(request):
+    f
+    
+    
 class Impview(TemplateView):
     model = Relatorio
     template_name = "imprimir.html"    
@@ -150,8 +157,9 @@ def pagina_principal (request):
     relatorios = Relatorio.objects.filter(usuario = request.user)
     relatorios_total = relatorios.count()
     equipes_total = Equipe.objects.all().count()
+    nome = User.objects.get(pk = request.user.id)
     
-    context = {'relatorios': relatorios_total, 'equipes': equipes_total}
+    context = {'relatorios': relatorios_total, 'equipes': equipes_total, "nome":nome}
     return render(request,'pagina_principal.html', context)
    
     
@@ -172,7 +180,7 @@ def venue_csv(request):
         writer.writerow(['Usuario', 'Codigo', 'Frequencia', 'Data', 'Mes', 'Data Criacao'])     
 	# Loop Thu and output
         for venue in venues:
-              writer.writerow([venue.usuario, venue.codigo, venue.frequencia, venue.data, venue.mes, venue.data_criacao])
+              writer.writerow([venue.usuario.nome, venue.codigo, venue.frequencia, venue.data, venue.mes, venue.data_criacao])
 
         return response
 

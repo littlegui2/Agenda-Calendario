@@ -43,8 +43,8 @@
             <tbody class="details">
                 {% for item in relatorios %}
               <tr>
-                <td class="text-center"> {{ item.usuario }} </td>
-                <td class="text-center"> {{ item.codigo }}</td>
+                <td class="text-center"> {{ item.usuario.codigo }} </td>
+                <td class="text-center"> {{ item.codigo_cliente }}</td>
                 <td class="text-center"> {{ item.frequencia }}</td>
                 <td class="text-center"> {{ item.data }}</td>
                 <td class="text-center"> {{ item.mes }}</td>

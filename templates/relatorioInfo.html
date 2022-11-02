@@ -21,17 +21,19 @@
             <thead class="table-dark">
               <tr>
                 <th scope="col">Equipe</th>
-                <th scope="col">Codigo da Equipe</th>
-                <th scope="col">Contato</th>
+                <th scope="col">Codigo do Vendedor</th>
+                <th scope="col">Contato do Vendedor</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                {% for equipe in eq %}
-                <td class=""><div class="" > {{ equipe.nome }} </div></td>
-                <td>{{ equipe.codigoV }}</td>
-                <td>{{ equipe.contato}}</td>
+                <td class=""><div class="" > {{ equipe.gestor.user.codigo }} </div></td>
+           
                 {% endfor %}
+                 
+                <td>{{ usuario.codigo }}</td>
+                <td>{{ usuario.contato}}</td>
               </tr>
             </tbody>
           </table>

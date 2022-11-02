@@ -1,7 +1,8 @@
 from django.views.generic import View
 from django.shortcuts import render, redirect
-
-from accounts.forms import SignUpForm
+from django.views.generic import CreateView
+from accounts.models import User
+from accounts.forms import GSignUpForm, SignUpForm
 
 
 class SignUpView(View):
@@ -22,3 +23,25 @@ class SignUpView(View):
             return redirect("accounts:signin")
         context = {"form": forms}
         return render(request, self.template_name, context)
+
+
+
+class GSignUpView(CreateView):
+    """ User registration view """
+    model = User
+    template_name = "accounts/gsignup.html"
+    form_class = GSignUpForm
+
+    def get(self, request, *args, **kwargs):
+        forms = self.form_class()
+        context = {"form": forms}
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        forms = self.form_class(request.POST)
+        if forms.is_valid():
+            forms.save()
+            return redirect("accounts:signin")
+        context = {"form": forms}
+        return render(request, self.template_name, context)
+

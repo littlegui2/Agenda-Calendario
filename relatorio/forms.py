@@ -20,7 +20,7 @@ class EquipeForm(forms.ModelForm):
     class Meta:
        
         model = Equipe
-        fields = ['nome','codigoV','contato','funcionario']
+        fields = ['funcionario']
         
     funcionario = CustomMMCF(queryset=None,
                             widget=forms.CheckboxSelectMultiple)

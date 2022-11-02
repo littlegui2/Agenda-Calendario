@@ -1,4 +1,4 @@
-from .user import User
+from .user import Gestor, User
 
 
-__all__ = [User]
+__all__ = [User, Gestor]
