@@ -195,6 +195,15 @@
                                   
                 </tbody>
             </table>
+            <form action="{% url 'relatorio:venue_csv' %}" method="get">
+              <input hidden type="text" name="mes" id="" value="{{ m }}" class="p-1 border">
+              <a>                                 
+                  <button class="btn btn-primary" data-toggle="modal" data-target="#excluiAluno"
+                          style="padding: 10px 17px;"> 
+                      <i>Gerar Relatorio</i>
+                  </button>
+              </a>
+          </form>
         </div>
     </div>
      
