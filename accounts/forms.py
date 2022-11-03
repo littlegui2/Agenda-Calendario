@@ -67,7 +67,7 @@ class SignUpForm(forms.ModelForm):
 
 
 
-class GSignUpForm(UserCreationForm):
+class GSignUpForm(forms.ModelForm):
     password1 = forms.CharField(
         label="Password",
         widget=forms.PasswordInput(attrs={"class": "form-control"}),
@@ -79,7 +79,7 @@ class GSignUpForm(UserCreationForm):
         
     )
 
-    class Meta(UserCreationForm.Meta):
+    class Meta:
         model = User
         fields = ["nome","codigo","email","contato"]
         widgets = {"nome": forms.TextInput(attrs={"class": "form-control"}),

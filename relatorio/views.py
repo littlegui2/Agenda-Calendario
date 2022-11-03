@@ -177,10 +177,10 @@ def venue_csv(request):
         venues = Relatorio.objects.filter(mes__icontains=dados)
 
 	# Add column headings to the csv file
-        writer.writerow(['Usuario', 'Codigo do Cliente', 'Frequencia', 'Data', 'Mes', 'Data Criacao'])     
+        writer.writerow(['Codigo do vendedor','Vendedor', 'Codigo do Cliente', 'Frequencia', 'Data', 'Mes', 'Data Criacao'])     
 	# Loop Thu and output
         for venue in venues:
-              writer.writerow([venue.usuario.nome, venue.codigo, venue.frequencia, venue.data, venue.mes, venue.data_criacao])
+              writer.writerow([venue.usuario.codigo,venue.usuario.nome, venue.codigo_cliente, venue.frequencia, venue.data, venue.mes, venue.data_criacao])
 
         return response
 
