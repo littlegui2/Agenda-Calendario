@@ -1,3 +1,4 @@
+from http.client import NOT_FOUND
 from django.http import Http404
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -10,6 +11,8 @@ from relatorio.forms import EquipeForm
 from .models import Equipe, Relatorio
 from django.http import HttpResponse
 from django.contrib.auth import get_user
+from django.template import RequestContext
+
 import csv
 
 
@@ -90,13 +93,11 @@ class EquipeCad(CreateView):
     success_url = reverse_lazy('relatorio:equipes')
     
     def get_form_kwargs(self):
-        
         kwargs = super(EquipeCad, self).get_form_kwargs()
         kwargs['request'] = self.request
         return kwargs
     
     def form_valid(self, form):
-        
         gest = Gestor.objects.get(user_id = self.request.user.id)
         form.instance.gestor = gest
         
@@ -107,10 +108,10 @@ class EquipeCad(CreateView):
 
 def equipeLista(request):
     gest = Gestor.objects.get(user_id = request.user.id)
-
-    equipes = Equipe.objects.filter(gestor=gest)
-    equipe = ""
-    context = {'equipes': equipes, "equipe": equipe}
+    equipes = Equipe.objects.filter(gestor_id=gest)
+  
+    context = {'equipes': equipes }
+    
     return render(request,'equipeLista.html', context )
 
 
@@ -122,29 +123,37 @@ class EquipeUpdate(UpdateView):
     form_class = EquipeForm
     
     def get_form_kwargs(self):
-        
         kwargs = super(EquipeUpdate, self).get_form_kwargs()
         kwargs['request'] = self.request
         return kwargs
     
     
     def get_queryset(self):
-        item = Equipe.objects.all()
-        
+        gest = Gestor.objects.get(user_id = self.request.user.id)
+        item = Equipe.objects.filter(gestor_id = gest)
+               
         return item
-
     
+
+def handler404(request, exception):
+    return render(request, '404.html')
+
 class EquipeDelete(DeleteView):
     modal = Equipe
     template_name = 'cadastroEquipe.html'
     success_url = reverse_lazy('relatorio:equipes')
     def get_queryset(self):
-        item = Equipe.objects.all()
+        gest = Gestor.objects.get(user_id = self.request.user.id)
+        item = Equipe.objects.filter(gestor = gest)
         
         return item
     
 def listaFuncionario(request):
-    f
+    equipes = Equipe.objects.filter(gestor_id=request.user.id)
+    ok = User.objects.filter(equipe__in=equipes).distinct()
+
+    context = {'func':ok}
+    return render(request, 'listaFunc.html', context)
     
     
 class Impview(TemplateView):
@@ -177,10 +186,10 @@ def venue_csv(request):
         venues = Relatorio.objects.filter(mes__icontains=dados)
 
 	# Add column headings to the csv file
-        writer.writerow(['Usuario', 'Codigo do Cliente', 'Frequencia', 'Data', 'Mes', 'Data Criacao'])     
+        writer.writerow(['Codigo do Vendedor', 'Codigo do Cliente', 'Frequencia', 'Data', 'Mes', 'Data Criacao'])     
 	# Loop Thu and output
         for venue in venues:
-              writer.writerow([venue.usuario.nome, venue.codigo, venue.frequencia, venue.data, venue.mes, venue.data_criacao])
+              writer.writerow([venue.usuario.codigo, venue.usuario.codigo, venue.frequencia, venue.data, venue.mes, venue.data_criacao])
 
         return response
 

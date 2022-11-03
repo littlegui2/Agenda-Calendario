@@ -14,8 +14,9 @@ from accounts.models.user import Gestor, User
 class Equipe(models.Model):
     gestor = models.ForeignKey(Gestor, on_delete=models.PROTECT, default="")
     funcionario = models.ManyToManyField(User)
-    def __str__(self):
-        return self.nome
+
+    def get_funcionario(self):
+        return "\n".join([p.funcionario for p in self.funcionario.all()])
     
 class Relatorio(models.Model):
     STATUS_CHOICE = (

@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .views import DashboardView
+from django.conf.urls import handler404, handler500
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -23,3 +24,5 @@ urlpatterns = [
     path("", include("calendarapp.urls")),
     path("", include("relatorio.urls")),
 ]
+
+handler404 = 'relatorio.views.handler404'
