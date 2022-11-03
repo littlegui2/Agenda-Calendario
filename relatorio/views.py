@@ -183,7 +183,7 @@ def venue_csv(request):
 
 	# Designate The Model
     
-        venues = Relatorio.objects.filter(mes__icontains=dados)
+        venues = Relatorio.objects.filter(mes__icontains=dados,usuario = request.user)
 
 	# Add column headings to the csv file
         writer.writerow(['Codigo do vendedor','Vendedor', 'Codigo do Cliente', 'Frequencia', 'Data', 'Mes', 'Data Criacao'])     

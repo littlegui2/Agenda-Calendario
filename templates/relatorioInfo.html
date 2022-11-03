@@ -28,12 +28,14 @@
             <tbody>
               <tr>
                {% for equipe in eq %}
-                <td class=""><div class="" > {{ equipe.gestor.user.codigo }} </div></td>
-           
-                {% endfor %}
+                <td class=""><div class="" > {{ equipe.gestor.user.nome }} </div></td>
+                <td>{{ usuario.codigo }}</td>
+                <td>{{ usuario.contato}}</td>
+                {% empty %}
                 <td></td>
                 <td>{{ usuario.codigo }}</td>
                 <td>{{ usuario.contato}}</td>
+                {% endfor %}
               </tr>
             </tbody>
           </table>
