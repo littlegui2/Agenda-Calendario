@@ -178,7 +178,7 @@
                         </li>
                     </ul>
                 </li>
-                
+                {% if request.user.is_gestor %}
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Equipes</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                     <ul class="treeview-menu">
@@ -188,9 +188,12 @@
                         <li>
                             <a class="treeview-item" href="{% url 'relatorio:equipes' %}"><i class="icon fa fa-circle-o"></i> Lista de equipes</a>
                         </li>
+                        <li>
+                            <a class="treeview-item" href="{% url 'relatorio:funcionarios' %}"><i class="icon fa fa-circle-o"></i> Lista de funcionarios da equipe</a>
+                        </li>
                     </ul>
                 </li>
-           
+                {% endif %}
                 <li>
                     <a class="app-menu__item" href="{% url 'relatorio:imprimir' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Relátorio</span></a>
                 </li>

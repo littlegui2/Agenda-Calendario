@@ -13,8 +13,6 @@
       </a>
   </div>
 </div>
-      
-      
       <div class="">
         <div class="table-responsive ">
           <table class="table">
@@ -27,24 +25,21 @@
             </thead>
             <tbody>
               <tr>
-               {% for equipe in eq %}
-                <td class=""><div class="" > {{ equipe.gestor.user.codigo }} </div></td>
-           
-                {% endfor %}
-                 
+                <td class="">
+                  {% for equipe in eq %}
+                    <div class="" > {{ equipe.gestor.user.codigo }} </div>
+                  {% endfor %}
+                </td> 
                 <td>{{ usuario.codigo }}</td>
                 <td>{{ usuario.contato}}</td>
               </tr>
             </tbody>
           </table>
-          <table class="table  table-responsive-lg d-lg-table table-striped ">
+      
+          <table class="table  table-hover table-bordered dataTable no-footer table-responsive-lg d-lg-table table-striped " id="sampleTable" role="grid" aria-describedby="sampleTable_info">
                 <thead class="thead-dark">
                     <tr>
-                      <th class="text-center">
-                         Segunda
-               
-
-                      </th>
+                      <th class="text-center">Segunda</th>
                       <th class="text-center">Terça</th>
                       <th class="text-center">Quarta</th>
                       <th class="text-center">Quinta</th>

@@ -72,18 +72,20 @@
                                 <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 261.641px;">Equipe</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 261.641px;">Vendedor</th>
                                             <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 417.312px;">Codigo do Cliente</th>
                                             <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 189.281px;">Frequência</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 189.281px;">Mês</th>
                                             <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;">Tempo de criação</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for item in rela %}
                                         <tr role="row">
-                                            <td> {{ item.equipeNome.nome}} </td>
-                                            <td> {{ item.codigo}} </td>
+                                            <td> {{ item.usuario.codigo}} </td>
+                                            <td> {{ item.codigo_cliente}} </td>
                                             <td> {{ item.frequencia }}</td>
+                                            <td> {{ item.mes }}</td>
                                             <td> {{ item.data_criacao }} </td>
                                         </tr>
                                         {% endfor %}

@@ -1,0 +1,242 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+<div class="d-flex bd-highlight my-3">
+  <div class=" align-middle bd-highlight">
+    <div class="text-uppercase display-4 "> {{ m }}</div>
+  </div>
+  <div class="ml-auto align-middle bd-highlight">
+      <a class="btn btn-primary"  href="{% url 'relatorio:relatorios' %}">
+          <i class="fas fa-plus"></i>
+          Lista de Relátorios
+      </a>
+  </div>
+</div>
+      <div class="">
+        <div class="table-responsive ">
+          <table class="table">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Equipe</th>
+                <th scope="col">Codigo do Vendedor</th>
+                <th scope="col">Contato do Vendedor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="">
+                  {% for equipe in eq %}
+                    <div class="" > {{ equipe.gestor.user.codigo }} </div>
+                  {% endfor %}
+                </td> 
+                <td>{{ usuario.codigo }}</td>
+                <td>{{ usuario.contato}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <div class="table-responsive">
+                        <div id="sampleTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 261.641px;">Segunda</th>
+                                                <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 417.312px;">Terça</th>
+                                                <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 189.281px;">Quarta</th>
+                                                <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 189.281px;">Quinta</th>
+                                                <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;">Sexta</th>
+                                                <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;">Sabádo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr role="row">
+                                                
+                                              <td style="border:1px solid black;">
+                                              
+                                                {% for item in info %}
+                                              {% if item.data == 'segunda' %}
+                                              <table class="table table-bordered">
+                                                <thead>
+                                                  <tr>
+                                                    <th class=" col text-center">Codigo do Cliente</th>
+                                                    <th scope="col"  class="text-center">Frequencia</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <td class="text-center">{{ item.codigo_cliente }}</td>
+                                                    <td class="text-center"> {{ item.frequencia }}</td>
+                                                  </tr>
+                                                <tbody>
+                                              </table>   
+                                              {% endif %}
+
+                                              {% endfor %}                         
+                                            </td>
+                                        
+                                        
+                                          <td style="border:1px solid black;">
+                                            {% for item in info %}
+                                            {% if item.data == 'terça' %}
+                                            <table class="table table-bordered">
+                                              <thead>
+                                                <tr>
+                                                  <th class=" col text-center">Codigo do Cliente</th>
+                                                  <th scope="col"  class="text-center">Frequencia</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                  <td class="text-center">{{ item.codigo_cliente }}</td>
+                                                  <td class="text-center"> {{ item.frequencia }}</td>
+                                                </tr>
+                                              <tbody>
+                                            </table>                            
+                                            {% endif %}
+                                            {% endfor %}
+                                          </td>
+                                        <td style="border:1px solid black;">
+                                            {% for item in info %}
+                                            {% if item.data == 'quarta' %}
+                                            <table class="table table-bordered">
+                                              <thead>
+                                                <tr>
+                                                  <th class=" col text-center">Codigo do Cliente</th>
+                                                  <th scope="col"  class="text-center">Frequencia</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody class="toast-body">
+                                                <tr>
+                                                  <td class="text-center">{{ item.codigo_cliente }}</td>
+                                                  <td class="text-center"> {{ item.frequencia }}</td>
+                                                </tr>
+                                              <tbody>
+                                            </table>                            
+                                            {% endif %}
+                                            {% endfor %}                        
+                                          
+                                          </td>
+                                          <td style="border:1px solid black;">
+
+                                            {% for item in info %}
+
+                                            {% if item.data == 'quinta' %}
+                                            <table class="table table-bordered">
+                                              <thead>
+                                                <tr>
+                                                  <th class=" col text-center">Codigo do Cliente</th>
+                                                  <th scope="col"  class="text-center">Frequencia</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                  <td class="text-center">{{ item.codigo_cliente }}</td>
+                                                  <td class="text-center"> {{ item.frequencia }}</td>
+                                                </tr>
+                                              <tbody>
+                                            </table>                            
+                                            {% endif %}
+                                            {% endfor %}
+                                          </td>
+                                          <td style="border:1px solid black;">
+                                            {% for item in info %}
+
+                                            {% if item.data == 'sexta' %}
+                                            <table class="table table-bordered" >
+                                              <thead>
+                                                <tr>
+                                                  <th class=" col text-center">Codigo do Cliente</th>
+                                                  <th scope="col"  class="text-center">Frequencia</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                  <td class="text-center">{{ item.codigo_cliente }}</td>
+                                                  <td class="text-center"> {{ item.frequencia }}</td>
+                                                </tr>
+                                              <tbody>
+                                            </table>                            
+                                            {% endif %}
+
+                                            
+
+                                            {% endfor %}
+                                          </td>
+                                          <td style="border:1px solid black;">
+                                            {% for item in info %}
+
+                                            {% if item.data == 'sabádo' %}
+                                            <table class="table table-bordered">
+                                              <thead>
+                                                <tr>
+                                                  <th class=" col text-center">Codigo do Cliente</th>
+                                                  <th scope="col"  class="text-center">Frequencia</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                  <td class="text-center">{{ item.codigo_cliente }}</td>
+                                                  <td class="text-center"> {{ item.frequencia }}</td>
+                                                </tr>
+                                              <tbody>
+                                            </table>    
+                                            {% else %}
+                                                                
+                                            {% endif %}
+                                            
+                                            {% endfor %}
+                                          </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <table class="table  table-hover table-bordered dataTable no-footer table-responsive-lg d-lg-table table-striped " id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+                <thead class="thead-dark">
+                    <tr>
+                      <th class="text-center">Segunda</th>
+                      <th class="text-center">Terça</th>
+                      <th class="text-center">Quarta</th>
+                      <th class="text-center">Quinta</th>
+                      <th class="text-center">Sexta</th>
+                      <th class="text-center">Sabádo</th>
+                    </tr>
+                </thead>
+                <tbody >
+                   
+                    <tr class="table-reponsive ">
+                      
+                        
+                        
+                     </tr>                      
+                                  
+                </tbody>
+            </table>
+            <form action="{% url 'relatorio:venue_csv' %}" method="get">
+              <input hidden type="text" name="mes" id="" value="{{ m }}" class="p-1 border">
+              <a>                                 
+                  <button class="btn btn-primary" data-toggle="modal" data-target="#excluiAluno"
+                          style="padding: 10px 17px;"> 
+                      <i>Gerar Relatorio</i>
+                  </button>
+              </a>
+          </form>
+        </div>
+    </div>
+     
+
+
+ 
+   
+{% endblock content %}
+

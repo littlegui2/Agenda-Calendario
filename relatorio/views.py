@@ -168,7 +168,7 @@ def pagina_principal (request):
     equipes_total = Equipe.objects.all().count()
     nome = User.objects.get(pk = request.user.id)
     
-    context = {'relatorios': relatorios_total, 'equipes': equipes_total, "nome":nome}
+    context = {'relatorios': relatorios_total,'rela':relatorios, 'equipes': equipes_total, "nome":nome}
     return render(request,'pagina_principal.html', context)
    
     
@@ -189,7 +189,7 @@ def venue_csv(request):
         writer.writerow(['Codigo do Vendedor', 'Codigo do Cliente', 'Frequencia', 'Data', 'Mes', 'Data Criacao'])     
 	# Loop Thu and output
         for venue in venues:
-              writer.writerow([venue.usuario.codigo, venue.usuario.codigo, venue.frequencia, venue.data, venue.mes, venue.data_criacao])
+              writer.writerow([venue.usuario.codigo, venue.codigo_cliente, venue.frequencia, venue.data, venue.mes, venue.data_criacao])
 
         return response
 
